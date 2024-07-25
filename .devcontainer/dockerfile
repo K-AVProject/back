@@ -1,0 +1,37 @@
+# ./.devcontainer/dockerfile
+
+FROM golang:1.22
+
+# Docker 클라이언트 설치
+RUN apt-get update && apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    software-properties-common
+    
+# Git 브랜치 정보를 가져오는 함수와 프롬프트 설정 추가
+RUN echo 'parse_git_branch() {' >> ~/.bashrc && \
+    echo '  git branch 2>/dev/null | grep "* " | sed "s/* //"' >> ~/.bashrc && \
+    echo '}' >> ~/.bashrc && \
+    echo 'export PS1="\[\033[01;34m\]\u@\h \[\033[01;32m\]\w \[\033[01;33m\](\$(parse_git_branch))\[\033[00m\] $ "' >> ~/.bashrc
+
+
+# Docker의 정적 바이너리 다운로드 및 설치
+RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-20.10.7.tgz | tar -xzC /usr/local/bin --strip-components=1 docker/docker
+
+# Docker Compose v2 설치
+RUN mkdir -p /usr/local/lib/docker/cli-plugins \
+    && curl -SL https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose \
+    && chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+
+# Docker Compose v1 설치
+RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
+&& chmod +x /usr/local/bin/docker-compose
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+RUN go install github.com/swaggo/swag/cmd/swag@latest
+
+CMD [ "sleep", "infinity" ]

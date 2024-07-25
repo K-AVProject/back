@@ -1,0 +1,17 @@
+{
+    "name": "Kicks go devcontainer",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "back",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "github.copilot",
+                "golang.go",
+                "atommaterial.a-file-icon-vscode",
+                "ms-azuretools.vscode-docker",
+                "eamodio.gitlens"
+            ]
+        }
+    }
+}

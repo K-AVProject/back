@@ -1,0 +1,13 @@
+# ./.devcontainer/docker-compose.yml
+version: '3.8'
+
+services:
+  back:
+    build:
+      context: .
+      dockerfile: dockerfile
+    volumes:
+      - ../:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+    command: sleep infinity
