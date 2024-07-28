@@ -1,0 +1,20 @@
+{
+    "name": "kavback",
+    "dockerComposeFile": "./docker-compose.yml",
+    "features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+    "service": "back",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "github.copilot",
+                "golang.go",
+                "atommaterial.a-file-icon-vscode",
+                "ms-azuretools.vscode-docker",
+                "eamodio.gitlens"
+            ]
+        }
+    }
+}
