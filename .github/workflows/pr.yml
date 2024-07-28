@@ -1,0 +1,46 @@
+# 이 항목은 PR을 제출했을때, PR을 통과해 머지될때 실행되는 workflow를 정의합니다.
+
+name: PR
+
+on:
+  push:
+    branches:
+      - dev  # pr을 통과해 dev 브랜치에 머지될때 실행합니다.
+  pull_request:
+    branches:
+      - dev  # pr을 제출할 때 실행합니다.
+  workflow_dispatch: # 수동으로도 workflow를 실행할 수 있도록 설정합니다.
+
+env:  # 환경 변수를 설정합니다.
+  GO_VERSION: '1.22'
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout  # 코드를 가져옵니다.
+        uses: actions/checkout@v3
+
+      - name: Go  # Go 언어를 사용하기 위한 설정입니다.
+        uses: actions/setup-go@v4
+        with:
+          node-version: ${{ env.GO_VERSION }}
+      
+      - name: Install format tools
+        run: |
+          go install mvdan.cc/gofumpt@latest \
+          github.com/segmentio/golines@latest \
+          github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+      - name: Run format tools
+        run: |
+          gofumpt -w .
+          golines -w .
+          golangci-lint run
+
+      - name: Test
+        run: go test -v ./test/... -count=1 -failfast # 테스트를 실행합니다.
+
+      - name: Build
+        run: go build -o main . # 빌드합니다.

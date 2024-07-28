@@ -1,4 +1,4 @@
-.PHONY: build up stop down help
+.PHONY: build up stop down lint help
 .DEFAULT_GOAL := help
 
 build: ## build the docker image
@@ -13,6 +13,11 @@ stop: ## stop the docker container
 
 down: ## stop and remove the docker container
 	docker compose -f ./compose.yaml down
+
+lint: ## run the linter | vscode를 쓰는 사람은 실시간으로 적용 중. 할 필요 없음
+	gofumpt -w .
+	golines -w .
+	golangci-lint run
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
