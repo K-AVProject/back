@@ -1,6 +1,9 @@
 {
-    "name": "Kicks go devcontainer",
+    "name": "kavback",
     "dockerComposeFile": "./docker-compose.yml",
+    "features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
     "service": "back",
     "workspaceFolder": "/app",
     "customizations": {
