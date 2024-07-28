@@ -15,7 +15,7 @@ down: ## stop and remove the docker container
 	docker compose -f ./compose.yaml down
 
 install-lint: ## install the linter
-	go install github.com/mvdan/gofumpt@latest
+	go install mvdan.cc/gofumpt@latest
 	go install github.com/segmentio/golines@latest
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
