@@ -8,7 +8,6 @@ services:
       dockerfile: go.dockerfile
     volumes:
       - .:/api
-      - /var/run/docker.sock:/var/run/docker.sock
     tty: true
     ports:
       - 8080:8080

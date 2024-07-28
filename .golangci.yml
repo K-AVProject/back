@@ -1,0 +1,19 @@
+linters:
+  enable:
+    - govet       # Go Vet: Go 코드의 잠재적인 문제를 찾아줍니다.
+    - errcheck    # Errcheck: 함수 호출에서 반환된 에러를 확인하지 않는 경우를 찾아줍니다.
+    - staticcheck # Staticcheck: 다양한 코드 문제를 찾아주는 고급 정적 분석 도구입니다.
+    - gosimple    # Gosimple: 불필요하게 복잡한 코드를 단순화할 수 있는 제안을 해줍니다.
+    - ineffassign # Ineffassign: 할당된 변수가 사용되지 않는 경우를 찾아줍니다.
+    - typecheck   # Typecheck: Go의 타입 시스템을 검사하여 타입 불일치를 찾아냅니다.
+    - varcheck    # Varcheck: 선언되었지만 사용되지 않는 전역 변수를 찾아줍니다.
+    - structcheck # Structcheck: 선언되었지만 사용되지 않는 구조체 필드를 찾아줍니다.
+    - unused      # Unused: 선언되었지만 사용되지 않는 코드 요소(변수, 함수, 상수 등)를 찾아줍니다.
+
+run:
+  timeout: 5m
+  issues-exit-code: 1
+
+output:
+  format: colored-line-number
+  sort-results: true
