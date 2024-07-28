@@ -25,7 +25,7 @@ jobs:
       - name: Go  # Go 언어를 사용하기 위한 설정입니다.
         uses: actions/setup-go@v4
         with:
-          node-version: ${{ env.GO_VERSION }}
+          go-version: ${{ env.GO_VERSION }}
       
       - name: Install format tools
         run: make install-lint # 코드 정리를 위한 도구를 설치합니다.
