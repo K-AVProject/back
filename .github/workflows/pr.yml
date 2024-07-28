@@ -28,16 +28,10 @@ jobs:
           node-version: ${{ env.GO_VERSION }}
       
       - name: Install format tools
-        run: |
-          go install mvdan.cc/gofumpt@latest \
-          github.com/segmentio/golines@latest \
-          github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+        run: make install-lint # 코드 정리를 위한 도구를 설치합니다.
 
       - name: Run format tools
-        run: |
-          gofumpt -w .
-          golines -w .
-          golangci-lint run
+        run: make lint # 코드 정리를 확인
 
       - name: Test
         run: go test -v ./test/... -count=1 -failfast # 테스트를 실행합니다.
