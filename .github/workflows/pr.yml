@@ -43,4 +43,4 @@ jobs:
         run: go test -v ./test/... -count=1 -failfast # 테스트를 실행합니다.
 
       - name: Build
-        run: go build -o main . # 빌드합니다.
+        run: go build -v ./... # 빌드합니다.
