@@ -16,6 +16,11 @@ RUN echo 'parse_git_branch() {' >> ~/.bashrc && \
     echo '}' >> ~/.bashrc && \
     echo 'export PS1="\[\033[01;34m\]\u@\h \[\033[01;32m\]\w \[\033[01;33m\](\$(parse_git_branch))\[\033[00m\] $ "' >> ~/.bashrc
 
+# Install gofumpt, golines, and golangci-lint
+RUN go install mvdan.cc/gofumpt@latest \
+    && go install github.com/segmentio/golines@latest \
+    && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+    
 # 작업 디렉토리 설정
 WORKDIR /app
 

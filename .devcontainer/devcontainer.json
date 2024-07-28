@@ -2,8 +2,8 @@
     "name": "kavback",
     "dockerComposeFile": "./docker-compose.yml",
     "features": {
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
-	},
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    },
     "service": "back",
     "workspaceFolder": "/app",
     "customizations": {
@@ -14,7 +14,20 @@
                 "atommaterial.a-file-icon-vscode",
                 "ms-azuretools.vscode-docker",
                 "eamodio.gitlens"
-            ]
+            ],
+            "settings": {
+                "go.formatTool": "gofumpt",
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": "explicit",
+                    "source.fixAll": "always"
+                },
+                "go.lintTool": "golangci-lint",
+                "go.lintFlags": [
+                    "run",
+                    "--fix"
+                ]
+            }
         }
     }
 }
