@@ -6,8 +6,6 @@ linters:
     - gosimple    # Gosimple: 불필요하게 복잡한 코드를 단순화할 수 있는 제안을 해줍니다.
     - ineffassign # Ineffassign: 할당된 변수가 사용되지 않는 경우를 찾아줍니다.
     - typecheck   # Typecheck: Go의 타입 시스템을 검사하여 타입 불일치를 찾아냅니다.
-    - varcheck    # Varcheck: 선언되었지만 사용되지 않는 전역 변수를 찾아줍니다.
-    - structcheck # Structcheck: 선언되었지만 사용되지 않는 구조체 필드를 찾아줍니다.
     - unused      # Unused: 선언되었지만 사용되지 않는 코드 요소(변수, 함수, 상수 등)를 찾아줍니다.
 
 run:
@@ -15,5 +13,7 @@ run:
   issues-exit-code: 1
 
 output:
-  format: colored-line-number
-  sort-results: true
+  formats:
+    - name: colored-line-number  # 형식 이름
+      format: colored-line-number  # 실제 형식
+  sort-results: true             # 결과를 정렬합니다.

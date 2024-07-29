@@ -2,14 +2,6 @@
 
 FROM golang:1.22
 
-# Docker 클라이언트 설치
-# RUN apt-get update && apt-get install -y \
-#     apt-transport-https \
-#     ca-certificates \
-#     curl \
-#     gnupg2 \
-#     software-properties-common
-    
 # Git 브랜치 정보를 가져오는 함수와 프롬프트 설정 추가
 RUN echo 'parse_git_branch() {' >> ~/.bashrc && \
     echo '  git branch 2>/dev/null | grep "* " | sed "s/* //"' >> ~/.bashrc && \
@@ -20,7 +12,7 @@ RUN echo 'parse_git_branch() {' >> ~/.bashrc && \
 RUN go install mvdan.cc/gofumpt@latest \
     && go install github.com/segmentio/golines@latest \
     && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-    
+
 # 작업 디렉토리 설정
 WORKDIR /app
 
