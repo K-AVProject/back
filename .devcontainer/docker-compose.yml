@@ -9,5 +9,5 @@ services:
     volumes:
       - ../:/app
       - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
-      
+
     command: sleep infinity

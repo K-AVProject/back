@@ -1,8 +1,8 @@
 FROM golang:1.22
 
-WORKDIR /api
+WORKDIR /app
 
-COPY go.mod go.sum ./
+COPY . /app
 RUN go mod download && go mod verify
 
 CMD ["go", "run", "main.go"]

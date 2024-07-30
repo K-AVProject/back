@@ -1,11 +1,15 @@
-.PHONY: build up stop down install-lint lint help
+.PHONY: run build up stop down install-lint lint help
 .DEFAULT_GOAL := help
+
+run: ## run the go program
+	go run main.go
 
 build: ## build the docker image
 	docker compose -f ./compose.yaml build
 
 up: ## start the docker container
 	make down
+	make build
 	docker compose -f ./compose.yaml up
 
 stop: ## stop the docker container
