@@ -1,11 +1,15 @@
-.PHONY: build up stop down install-lint lint help
+.PHONY: run build up stop down install-lint lint test push help
 .DEFAULT_GOAL := help
+
+run: ## run the go program
+	go run main.go
 
 build: ## build the docker image
 	docker compose -f ./compose.yaml build
 
 up: ## start the docker container
 	make down
+	make build
 	docker compose -f ./compose.yaml up
 
 stop: ## stop the docker container
@@ -23,6 +27,12 @@ lint: ## run the linter | vscode를 쓰는 사람은 실시간으로 적용 중.
 	gofumpt -w .
 	golines -w .
 	golangci-lint run
+
+test: ## run the test
+	go test -v ./test/... -count=1 -failfast
+
+push: ## git push origin branch
+	@git branch --show-current | xargs -I {} git push origin {}
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
